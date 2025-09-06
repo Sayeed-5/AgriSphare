@@ -7,12 +7,14 @@ import SellerSignup from './pages/Seller_signup';
 import AgriMart from './pages/AgriMart';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
 
   return (
     <>
       <Header />
+      <Analytics/>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<SigninPage />} />
