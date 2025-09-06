@@ -249,7 +249,6 @@ const SigninPage = () => {
                             </button>
                             <a href="/seller" className="text-blue-500 text-center">Want to be a seller ?</a>
                         </form>
-                        
                     )}
                 </div>
             </div>
