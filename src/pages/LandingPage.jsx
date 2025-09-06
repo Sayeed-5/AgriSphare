@@ -1,10 +1,10 @@
 import { TooltipProvider } from "../components/ui/tooltip"
 import Hero from "../components/Hero"
 import Features from "../components/Features"
-import FarmerDashboard from "../components/FarmerDashboard"
-import LocalBuyersLogistics from "../components/LocalBuyersLogistics"
-import Leaderboard from "../components/LeaderBoard"
-import Footer from "../components/Footer"
+// import FarmerDashboard from "../components/FarmerDashboard"
+// import LocalBuyersLogistics from "../components/LocalBuyersLogistics"
+// import Leaderboard from "../components/LeaderBoard"
+// import Footer from "../components/Footer"
 
 
 function LandingPage() {
@@ -15,11 +15,11 @@ function LandingPage() {
             <main>
               <Hero />
               <Features />
-              <FarmerDashboard />
+              {/* <FarmerDashboard />
               <Leaderboard />
-              <LocalBuyersLogistics />
+              <LocalBuyersLogistics /> */}
             </main>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
       </TooltipProvider>
