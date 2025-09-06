@@ -7,7 +7,7 @@ import SellerSignup from './pages/Seller_signup';
 import AgriMart from './pages/AgriMart';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
 
