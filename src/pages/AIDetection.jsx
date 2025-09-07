@@ -168,7 +168,7 @@ const AIDetection = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#FFF9F0] to-[#F5F9F4] p-4 py-18">
+        <div className="min-h-screen bg-[#FFF9F0]/30 p-4 py-18">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
@@ -359,7 +359,7 @@ const AIDetection = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="mt-12 text-center p-6 bg-white rounded-2xl shadow-lg border border-purple-100">
+                {/* <div className="mt-12 text-center p-6 bg-white rounded-2xl shadow-lg border border-purple-100">
                     <h4 className="text-lg font-semibold text-purple-800 mb-2">
                         🔬 Powered by EfficientNet-B2 Deep Learning Model
                     </h4>
@@ -368,7 +368,7 @@ const AIDetection = () => {
                         <br />
                         <strong>For critical cases, always consult with agricultural professionals.</strong>
                     </p>
-                </div>
+                </div> */}
             </div>
         </div>
     );

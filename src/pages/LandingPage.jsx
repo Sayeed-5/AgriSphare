@@ -1,9 +1,6 @@
 import { TooltipProvider } from "../components/ui/tooltip"
 import Hero from "../components/Hero"
 import Features from "../components/Features"
-// import FarmerDashboard from "../components/FarmerDashboard"
-// import LocalBuyersLogistics from "../components/LocalBuyersLogistics"
-// import Leaderboard from "../components/LeaderBoard"
 import Footer from "../components/Footer"
 import ProductDetails from "../components/ProductDetails"
 import Carasoul from "../components/Carasoul"
@@ -12,7 +9,8 @@ import SchemeCards from "../components/SchemeCards"
 import FarmingChatbot from "../components/FarmingChatbot"
 import AIDetection from "./AIDetection"
 import ChatbotWidget from "../components/ChatbotWidget"
-// import Dashboard from "./Dashboard"
+import Education from "./Education"
+
 
 
 function LandingPage() {
@@ -23,6 +21,14 @@ function LandingPage() {
             <main>
               <Hero />
               <Features />
+              <AIDetection/>
+              <div className="max-w-[100rem] mx-auto " >
+                <div className="min-h-screen py-12">
+                  <Carasoul/>
+                  <VideoCarasoul/>
+                  <SchemeCards/>
+                </div>
+              </div>
               <ChatbotWidget/>
             </main>
             <Footer />

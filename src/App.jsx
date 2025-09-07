@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react"
 import ProductDetails from './components/ProductDetails';
 import Education from './pages/Education';
 import AIDetection from './pages/AIDetection';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/education' element={<Education/>}/>
           <Route path='/ai-detection' element={<AIDetection/>}/>
         </Routes>
+      <Footer />
     </>
   )
 }
