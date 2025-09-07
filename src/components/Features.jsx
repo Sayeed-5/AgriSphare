@@ -28,7 +28,7 @@ import {
           { icon: <Bug className="h-4 w-4 text-orange-600" />, text: "Pest & nutrient deficiency alerts" },
           { icon: <Sparkles className="h-4 w-4 text-yellow-600" />, text: "Personalized recommendations" },
         ],
-        image: "https://helios-i.mashable.com/imagery/articles/07DAi6w1g4S3zqeyTgGDTSE/hero-image.fill.size_1200x675.v1703695450.jpg",
+        image: "https://as2.ftcdn.net/v2/jpg/05/17/72/83/1000_F_517728333_bRo1d5zBGahlA08DZiDZwcr44jvbAT8c.jpg",
         navigator: "Try Crop Protection"
       },
       {

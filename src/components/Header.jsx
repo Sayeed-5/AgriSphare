@@ -61,11 +61,11 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="mt-10">
             <img 
               src="/Agrisphere-logo.png" 
               alt="AgriSphere" 
-              className="h-12 w-auto"
+              className="h-32 w-auto"
             />
           </Link>
 
@@ -87,7 +87,7 @@ const Header = () => {
               AgriMart
             </Link>
             <Link 
-              to="https://huggingface.co/spaces/SuvamBhola/plant-disease-detector" 
+              to="/ai-detection" 
               className="text-sm font-medium   hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black transition-all duration-200">
               AI Detection
             </Link>
@@ -103,7 +103,7 @@ const Header = () => {
           {/* User Section */}
           <div>
             {firebase.isLoggedIn ? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 cursor-pointer">
                 {firebase.user.photoURL ? (
                   <img
                     src={firebase.user.photoURL}
@@ -118,7 +118,7 @@ const Header = () => {
                 </span>
                 <button 
                   onClick={handleLogout} 
-                  className="px-2 py-2 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white rounded-3xl text-white text-sm">
+                  className="px-2 py-2 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white rounded-3xl text-white cursor-pointer text-sm">
                   <LogOutIcon/>
                 </button>
               </div>
@@ -128,7 +128,7 @@ const Header = () => {
                 className="hidden md:flex items-center gap-2 hover:bg-white/40 rounded-md px-2 py-0.5 text-[#212121] hover:text-[#29B6F6]  "
               >
                 <UserCircle2 size={24}/>
-                <span className="text-sm font-medium">Sign In</span>
+                <span className="text-sm font-medium ">Sign In</span>
               </Link>
             )}
           </div>

@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import { Analytics } from "@vercel/analytics/react"
 import ProductDetails from './components/ProductDetails';
 import Education from './pages/Education';
+import AIDetection from './pages/AIDetection';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} /> 
           <Route path="/product/details/:id" element={<ProductDetails />} /> 
           <Route path='/education' element={<Education/>}/>
+          <Route path='/ai-detection' element={<AIDetection/>}/>
         </Routes>
     </>
   )
