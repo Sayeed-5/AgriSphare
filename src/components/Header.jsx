@@ -149,7 +149,7 @@
 
 
 
-import { Menu, X, UserCircle2 } from "lucide-react";
+import { Menu, X, UserCircle2, LogOutIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFirebase, auth, firestore } from "../context/firebase";
 import { useRef, useEffect, useState } from "react";
