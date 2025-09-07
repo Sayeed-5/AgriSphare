@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LogOutIcon } from "lucide-react";
 
 // --- SVG Icons ---
 // Using components for icons to keep the main component clean
@@ -34,6 +35,7 @@ const Sidebar = () => {
         { name: 'Orders', icon: <CartIcon /> },
         { name: 'Education', icon: <EducationIcon /> },
         { name: 'AI Detection', icon: <AIDetectionIcon /> },
+        { name: 'Log Out', icon: <LogOutIcon /> },
     ];
 
     const activeItem = 'Overview';
