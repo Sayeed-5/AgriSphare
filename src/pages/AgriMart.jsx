@@ -38,7 +38,7 @@ const ProductCard = (props) => {
     }; 
 
     return (
-        <div className="bg-[#FFF9F0] border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out">
+        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div className="w-full h-48 bg-gray-200">
                 <img src={props.image} alt={props.name} className="w-full h-full object-cover"/>
             </div>
@@ -55,10 +55,10 @@ const ProductCard = (props) => {
                 
                 
                 <div className="flex items-center space-x-2">
-                    <button onClick={productdetails} className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                    <button onClick={productdetails} className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-200">
                         Details
                     </button>
-                    <button onClick={placeOrder} className="w-full text-center py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200">
+                    <button onClick={placeOrder} className="w-full text-center py-2 px-4 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white rounded-md  transition-colors duration-200">
                         Buy Now
                     </button>
                 </div>
