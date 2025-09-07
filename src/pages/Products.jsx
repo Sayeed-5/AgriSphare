@@ -50,13 +50,13 @@ const OrderCard = ({ order, onUpdateStatus }) => {
         {order.status === 'ongoing' && (
           <div className="flex items-center space-x-3">
             <button
-              onClick={() => onUpdateStatus(order.id, 'declined')}
+              onClick={() => onUpdateStatus(order.id, order.productId, "declined")}
               className="bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm cursor-pointer"
             >
               Decline
             </button>
             <button
-              onClick={() => onUpdateStatus(order.id, 'delivered')}
+              onClick={() => onUpdateStatus(order.id, order.productId, "delivered")}
               className="bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white py-2 px-6 rounded-lg font-semibold text-sm transition-colors duration-300 shadow-lg hover:shadow-xl cursor-pointer"
             >
               Accept
@@ -326,13 +326,21 @@ function Products(props) {
     loadOrders();
   }, []);
 
-  const handleUpdateOrderStatus = (orderId, newStatus) => {
-    setOrders((prevOrders) =>
-      prevOrders.map((order) =>
-        order.id === orderId ? { ...order, status: newStatus } : order
-      )
-    );
-  };
+  const handleUpdateOrderStatus = async (orderId, productId, newStatus) => {
+    try {
+      // Update locally (UI refresh)
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+  
+      // Update in Firestore (both Product subcollection + Global Orders)
+      await updateOrderStatus(productId, orderId, newStatus);
+    } catch (error) {
+      console.error("Failed to update order:", error);
+    }
+  }
 
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);

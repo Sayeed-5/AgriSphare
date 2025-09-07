@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../context/firebase';
 import { useNavigate } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
 
 // --- HELPER COMPONENTS ---
 
@@ -21,12 +22,19 @@ const ProductCard = (props) => {
     //     alert("Please Login to shopping")
     //     return
     // }
-
-    const placeOrder = async () => {
-        const result = await firebase.placeOrder(props.id);
-        alert("Your Order is placed")
-        //console.log("Order Placed", result);
-    }
+    
+    const handlePlaceOrder = async () => {
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+        try {
+            const result = await firebase.placeOrder(props.id, currentUser); 
+            alert("Your Order is placed successfully!");
+            console.log("Order Placed:", result.id);
+        } catch (error) {
+            console.error("🔥 Place order error:", error.message);
+            alert("Failed to place order. Please try again.");
+        }
+    };
 
     const productdetails = async () => {
         navigate(`/product/details/${props.id}`)
@@ -44,14 +52,16 @@ const ProductCard = (props) => {
                         {props.category}
                     </span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mb-1">₹{props.price} </p>
-                <p className="text-sm text-gray-500 mb-4">Min order: {props.minOrder} </p>
+                <p className="text-2xl font-bold text-gray-900 mb-1">₹{props.price}/{props.unit}</p>
+               
+                <p className="text-sm text-gray-500 mb-4">Min order: {props.minOrder}/{props.unit} </p>
+                
                 
                 <div className="flex items-center space-x-2">
                     <button onClick={productdetails} className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors duration-200">
                         Details
                     </button>
-                    <button onClick={placeOrder} className="w-full text-center py-2 px-4 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white rounded-md  transition-colors duration-200">
+                    <button onClick={handlePlaceOrder} className="w-full text-center py-2 px-4 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white rounded-md  transition-colors duration-200">
                         Buy Now
                     </button>
                 </div>

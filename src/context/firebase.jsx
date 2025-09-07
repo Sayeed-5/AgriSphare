@@ -110,16 +110,36 @@ export const FirebaseProvider = (props) => {
         const result = await getDocs(q);
         return result;
     }
+    // Place Order function
+    const placeOrder = async (productId, user) => {
+        try {
+            // 1. Save inside product's sub-collection
+            const productOrdersRef = collection(firestore, "Products", productId, "Orders");
+            const productOrderDoc = await addDoc(productOrdersRef, {
+                userId: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                productId,
+                status: "ongoing",
+            });
 
-    const placeOrder = async (productId) => {
-        const collectionRef = collection(firestore, 'Products', productId, 'Orders');
-        const result = await addDoc(collectionRef, {
-            userId: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-        });
-        return result
-    }
+            // 2. Save inside global Orders collection (same orderId)
+            const globalOrderRef = doc(firestore, "Orders", productOrderDoc.id);
+            await setDoc(globalOrderRef, {
+                userId: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                productId,
+                status: "ongoing",
+            });
+
+            return productOrderDoc; // return order ref if needed
+        } catch (error) {
+            console.error("Error placing order:", error);
+            throw error;
+        }
+    };
+
 
     const getOrders = async (productId) => {
         const collectionRef = collection(firestore, 'Products', productId, 'Orders');
@@ -157,13 +177,33 @@ export const FirebaseProvider = (props) => {
     const getProductsByid = async (id) => {
         return getDoc(doc(firestore, 'Products', id));
     }
+
+    const updateOrderStatus = async (productId, orderId, newStatus) => {
+        try {
+          // 1. Update inside Product → productId → Orders
+          const productOrderRef = doc(firestore, "Products", productId, "Orders", orderId);
+          await updateDoc(productOrderRef, {
+            status: newStatus,
+          });
+      
+          // 2. Update inside Global Orders
+          const globalOrderRef = doc(firestore, "Orders", orderId);
+          await updateDoc(globalOrderRef, {
+            status: newStatus,
+          });
+      
+          console.log("Order status updated:", newStatus);
+        } catch (error) {
+          console.error("Error updating order status:", error);
+        }
+    };
       
     const isLoggedIn = user ? true : false;
 
     //console.log(user);
 
     return (
-        <FirebaseContext.Provider value={{signupWithEmailPassword, signinWithEmailPassword, signinWithGoogle, CreateNewUser, logout, getAllProducts, AddNewProduct, fetchMyProducts, placeOrder, CreateNewSeller, getOrders, fetchMyOrders, getProductsByid, user,dbUser, isLoggedIn}}>
+        <FirebaseContext.Provider value={{signupWithEmailPassword, signinWithEmailPassword, signinWithGoogle, CreateNewUser, logout, getAllProducts, AddNewProduct, fetchMyProducts, placeOrder, CreateNewSeller, getOrders, fetchMyOrders, getProductsByid, updateOrderStatus, user,dbUser, isLoggedIn}}>
             {props.children}
         </FirebaseContext.Provider>
     );
