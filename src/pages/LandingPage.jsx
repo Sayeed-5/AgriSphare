@@ -1,7 +1,6 @@
 import { TooltipProvider } from "../components/ui/tooltip"
 import Hero from "../components/Hero"
 import Features from "../components/Features"
-import Footer from "../components/Footer"
 import ProductDetails from "../components/ProductDetails"
 import Carasoul from "../components/Carasoul"
 import VideoCarasoul from "../components/VideoCarasoul"
@@ -31,7 +30,6 @@ function LandingPage() {
               </div>
               <ChatbotWidget/>
             </main>
-            <Footer />
           </div>
         </div>
       </TooltipProvider>
