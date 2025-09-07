@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import { Analytics } from "@vercel/analytics/react"
 import ProductDetails from './components/ProductDetails';
+import Education from './pages/Education';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/agrimart" element={<AgriMart />} /> 
           <Route path="/dashboard" element={<Dashboard />} /> 
           <Route path="/product/details/:id" element={<ProductDetails />} /> 
+          <Route path='/education' element={<Education/>}/>
         </Routes>
     </>
   )
