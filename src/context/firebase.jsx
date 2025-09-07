@@ -157,6 +157,7 @@ export const FirebaseProvider = (props) => {
       
           const ordersSnapshot = await getOrders(productId);
           ordersSnapshot.forEach(orderDoc => {
+            const orderData = orderDoc.data();
             orders.push({
               id: orderDoc.id,
               productId: productId,
