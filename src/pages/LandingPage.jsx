@@ -6,6 +6,9 @@ import Features from "../components/Features"
 // import Leaderboard from "../components/LeaderBoard"
 // import Footer from "../components/Footer"
 import ProductDetails from "../components/ProductDetails"
+import Carasoul from "../components/Carasoul"
+import VideoCarasoul from "../components/VideoCarasoul"
+import SchemeCards from "../components/SchemeCards"
 // import Dashboard from "./Dashboard"
 
 
@@ -17,11 +20,6 @@ function LandingPage() {
             <main>
               <Hero />
               <Features />
-              <ProductDetails />
-              {/* <Dashboard/> */}
-              {/* <FarmerDashboard />
-              <Leaderboard />
-              <LocalBuyersLogistics /> */}
             </main>
             {/* <Footer /> */}
           </div>
