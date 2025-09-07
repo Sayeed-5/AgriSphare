@@ -20,7 +20,7 @@ const Hero = () => {
           {/* CTA Buttons */}
           <span className="flex flex-col sm:flex-row gap-4 justify-center items-center bg-black/60 rounded-4xl px-3 py-2 pl-5">
             <div className="text-xl text-white">Start Your Smart Farming Journey</div>
-            <button className=" bg-green-500 hover:bg-[#FFC107] hover:text-[#212121] text-white px-6 py-2 rounded-3xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
+            <button className=" bg-green-500 hover:bg-[#FFC107] hover:text-[#212121] text-white px-6 py-2 rounded-3xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl transition-colors duration-300">
               Get Started 
             </button>
             

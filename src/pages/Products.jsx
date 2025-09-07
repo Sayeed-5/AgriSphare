@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import {useFirebase} from '../context/firebase'
+import { useFirebase } from '../context/firebase'
 import { Link } from "react-router-dom";
 import { uploadOnCloudinary } from "../context/cloudinary.js";
 
@@ -51,13 +51,13 @@ const OrderCard = ({ order, onUpdateStatus }) => {
           <div className="flex items-center space-x-3">
             <button
               onClick={() => onUpdateStatus(order.id, 'declined')}
-              className="bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm"
+              className="bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm cursor-pointer"
             >
               Decline
             </button>
             <button
               onClick={() => onUpdateStatus(order.id, 'delivered')}
-              className="bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-300 text-sm"
+              className="bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white py-2 px-6 rounded-lg font-semibold text-sm transition-colors duration-300 shadow-lg hover:shadow-xl cursor-pointer"
             >
               Accept
             </button>
@@ -88,7 +88,7 @@ const AddProductForm = () => {
   const [minOrder, setMinOrder] = useState('')
   const [stock, setStock] = useState('')
   const [image, setImage] = useState('')
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!image) {
@@ -105,108 +105,132 @@ const AddProductForm = () => {
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200" id='orders'>
         <h2 className="text-xl font-bold text-gray-900 mb-6">Add Product</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium text-gray-700">
-                Product name
-              </label>
-              <div className="relative">
-                <input 
-                  type="text"
-                  placeholder="e.g., Tomato (Heirloom)"
-                  className="form-input"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-            </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">Category</label>
-              <select className="form-input" value={category} onChange={(e) => setCategory(e.target.value)}>
-                <option>Select category</option>
-                <option>Vegetables</option>
-                <option>Seeds</option>
-                <option>Fertilizers</option>
-                <option>Saplings</option>
-              </select>
-            </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">Price</label>
+          <div >
+            <label className="text-sm font-medium text-gray-700">
+              Product name
+            </label>
+            <div className="relative">
               <input
                 type="text"
-                placeholder="Enter price (per kg/bag)"
+                placeholder="e.g., Tomato (Heirloom)"
                 className="form-input"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">
-                Min order quantity
-              </label>
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700">Category</label>
+            <select className="form-input" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option>Select category</option>
+              <option>Vegetables</option>
+              <option>Seeds</option>
+              <option>Fertilizers</option>
+              <option>Saplings</option>
+            </select>
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-sm font-medium text-gray-700">
+              Description
+            </label>
+            <div className="relative">
               <input
                 type="text"
-                placeholder="Enter minimum quantity"
+                placeholder="e.g., Tomato (Heirloom)"
                 className="form-input"
-                value={minOrder}
-                onChange={(e) => setMinOrder(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">
-                Stock status
-              </label>
-              <select className="form-input" value={stock} onChange={(e) => setStock(e.target.value)}>
-                <option>Select options</option>
-                <option>In stock</option>
-                <option>Out of stock</option>
-              </select>
-              <p className="text-xs text-gray-500 mt-1">
-                Set to Out of stock when unavailable
-              </p>
-            </div>
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium text-gray-700">
-                Upload image
-              </label>
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                <div className="space-y-1 text-center">
-                <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                    aria-hidden="true"
+          </div>
+          
+          <div>
+            <label className="text-sm font-medium text-gray-700">Units</label>
+            <select className="form-input">
+              <option>Kg</option>
+              <option>Pc</option>
+              <option>Bag</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700">Price</label>
+            <input
+              type="number"
+              placeholder="Enter price (per kg/bag)"
+              className="form-input"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Min order quantity
+            </label>
+            <input
+              type="text"
+              placeholder="Enter minimum quantity"
+              className="form-input"
+              value={minOrder}
+              onChange={(e) => setMinOrder(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Stock status
+            </label>
+            <select className="form-input" value={stock} onChange={(e) => setStock(e.target.value)}>
+              <option>Select options</option>
+              <option>In stock</option>
+              <option>Out of stock</option>
+            </select>
+            <p className="text-xs text-gray-500 mt-1">
+              Set to Out of stock when unavailable
+            </p>
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-sm font-medium text-gray-700">
+              Upload image
+            </label>
+            <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer bg-white rounded-md font-medium text-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] transition-colors duration-300 shadow-lg hover:shadow-xl focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500"
                   >
-                    <path
-                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div className="space-y-1 text-center">
+                <svg
+                  className="mx-auto h-12 w-12 text-gray-400"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <div className="flex text-sm">
+                  
+                    <span>Choose a product image</span>
+                    <input
+                      id="file-upload"
+                      name="file-upload"
+                      type="file"
+                      className="sr-only"
+                      onChange={(e) => setImage(e.target.files[0])}
                     />
-                  </svg>
-                  <div className="flex text-sm text-gray-600">
-                    <label
-                      htmlFor="file-upload"
-                      className="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500"
-                    >
-                      <span>Choose a product image</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        className="sr-only"
-                        onChange={(e) => setImage(e.target.files[0])}
-                      />
-                    </label>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-3 mt-6">
-              <button type='submit' className="bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition-colors duration-300 text-sm">
-                Add Product
-              </button>
-            </div>
+            </label>
+          </div>
+          <div className="mx-auto gap-3 mt-6 md:col-span-2">
+            <button type='submit' className="bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white px-6 py-2 rounded-3xl font-semibold text-sm transition-colors shadow-lg hover:shadow-xl transition-colors duration-300 py-2 px-6 rounded-lg cursor-pointer">
+              Add Product
+            </button>
+          </div>
         </form>
       </div>
     </>
@@ -214,40 +238,39 @@ const AddProductForm = () => {
 };
 
 const ProductListItem = (props) => {
-    return(
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <img
-            src={props.image}
-            alt={props.name}
-            className="w-16 h-16 rounded-lg object-cover"
-          />
-          <div>
-            <p className="font-bold text-gray-800">{props.name}</p>
-            <p className="text-xs text-gray-500">
-              Category: {props.category} • Min order: {props.minOrder}
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <span
-            className={`text-xs font-semibold px-3 py-1 rounded-full ${
-              props.stock
-                ? 'bg-green-100 text-green-800'
-                : 'bg-red-100 text-red-800'
-            }`}
-          >
-            {props.stock ? 'In stock' : 'Out of stock'}
-          </span>
-          <button className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm">
-            Edit
-          </button>
-          <button className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm">
-            Close
-          </button>
+  return (
+    <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-wrap items-center justify-between gap-4">
+      <div className="flex items-center gap-4">
+        <img
+          src={props.image}
+          alt={props.name}
+          className="w-16 h-16 rounded-lg object-cover"
+        />
+        <div>
+          <p className="font-bold text-gray-800">{props.name}</p>
+          <p className="text-xs text-gray-500">
+            Category: {props.category} • Min order: {props.minOrder}
+          </p>
         </div>
       </div>
-    )
+      <div className="flex items-center gap-3">
+        <span
+          className={`text-xs font-semibold px-3 py-1 rounded-full ${props.stock
+              ? 'bg-[#4CAF50] text-green-800'
+              : 'bg-red-100 text-red-800'
+            }`}
+        >
+          {props.stock ? 'In stock' : 'Out of stock'}
+        </span>
+        <button className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm cursor-pointer">
+          Edit
+        </button>
+        <button className="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 text-sm cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
+  )
 }
 
 const Pagination = ({
@@ -265,11 +288,10 @@ const Pagination = ({
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-300 ${
-            currentPage === page
-              ? 'bg-green-600 text-white'
+          className={`px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-300 cursor-pointer ${currentPage === page
+              ? 'bg-[#4CAF50] text-white'
               : 'bg-white text-gray-700 hover:bg-gray-100 border'
-          }`}
+            }`}
         >
           {page}
         </button>
@@ -287,9 +309,9 @@ function Products(props) {
   const firebase = useFirebase()
 
   useEffect(() => {
-      if(firebase.isLoggedIn){
-          firebase.fetchMyProducts(firebase.user.uid).then((product) => setProducts(product.docs))
-      }    
+    if (firebase.isLoggedIn) {
+      firebase.fetchMyProducts(firebase.user.uid).then((product) => setProducts(product.docs))
+    }
   }, [firebase])
 
   useEffect(() => {
@@ -328,35 +350,34 @@ function Products(props) {
   const FilterButton = ({ tabName, children }) => (
     <button
       onClick={() => handleTabChange(tabName)}
-      className={`px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-300 ${
-        activeTab === tabName
-          ? 'bg-green-600 text-white'
+      className={`px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-300 cursor-pointer ${activeTab === tabName
+          ? 'bg-[#4CAF50] text-white'
           : 'bg-white text-gray-700 hover:bg-gray-100'
-      }`}
+        }`}
     >
       {children}
     </button>
   );
 
-  if(!firebase.isLoggedIn){
-        return (
-            <div className='container mx-auto text-center py-20'>
-                <h1 className='text-2xl mb-5'>Please login to view your orders</h1>
-                <Link
-                to="/login"
-                className="flex justify-center gap-2  text-[#212121] hover:text-[#29B6F6] transition-colors"
-              >
-                <span className="text-2xl font-medium border-2 px-2 py-2 rounded-lg">Sign In</span>
-              </Link>
-            </div>
-        )
-    }
+  if (!firebase.isLoggedIn) {
+    return (
+      <div className='container mx-auto text-center py-20'>
+        <h1 className='text-2xl mb-5'>Please login to view your orders</h1>
+        <Link
+          to="/login"
+          className="flex justify-center gap-2  text-[#212121] hover:text-[#29B6F6] transition-colors"
+        >
+          <span className="text-2xl font-medium border-2 px-2 py-2 rounded-lg">Sign In</span>
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <>
       <div className="max-w-[100rem] mx-auto bg-fixed bg-cover bg-center ">
         <style>{`.form-input{width:100%;margin-top:.25rem;padding:.5rem .75rem;border:1px solid #D1D5DB;border-radius:.5rem;transition:all .2s}.form-input:focus{outline:0;--tw-ring-color:#10B981;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000);border-color:#10B981} `}</style>
-        
+
         <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-4xl mx-auto space-y-12">
             {/* Orders Section */}
@@ -364,9 +385,9 @@ function Products(props) {
               <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
                 <h1 className="text-3xl font-bold text-gray-900">Orders</h1>
                 <div className="flex items-center space-x-2 bg-white p-1 rounded-lg border border-gray-200 shadow-sm">
-                  <FilterButton tabName="ongoing">Ongoing</FilterButton>
-                  <FilterButton tabName="declined">Declined</FilterButton>
-                  <FilterButton tabName="delivered">Delivered</FilterButton>
+                  <FilterButton tabName="ongoing" className="cursor-pointer" >Ongoing</FilterButton>
+                  <FilterButton tabName="declined" className="cursor-pointer" >Declined</FilterButton>
+                  <FilterButton tabName="delivered" className="cursor-pointer" >Delivered</FilterButton>
                 </div>
               </div>
               <div className="space-y-4">
@@ -412,10 +433,10 @@ function Products(props) {
             </div>
             {/* Product Management Section */}
             <div>
-              <AddProductForm/>
+              <AddProductForm />
               <div className="mt-6 space-y-4">
                 {products.map((product) => (
-                  <ProductListItem key={product.id} {...product.data()} id={product.id}/>
+                  <ProductListItem key={product.id} {...product.data()} id={product.id} />
                 ))}
               </div>
             </div>

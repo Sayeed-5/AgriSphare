@@ -41,10 +41,10 @@ const ProductCard = (props) => {
                 <p className="text-sm text-gray-500 mb-4">Min order: {props.minOrder} </p>
                 
                 <div className="flex items-center space-x-2">
-                    <button className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                    <button className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
                         Details
                     </button>
-                    <button onClick={placeOrder} className="w-full text-center py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200">
+                    <button onClick={placeOrder} className="w-full text-center py-2 px-4 rounded-md bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white transition-colors duration-200 cursor-pointer">
                         Buy Now
                     </button>
                 </div>
@@ -125,7 +125,7 @@ const Sidebar = ({ filters, setFilters }) => {
                              <button
                                 key={option}
                                 onClick={() => handleAvailabilityChange(option)}
-                                className={`w-full text-left px-4 py-2 border rounded-md transition-colors duration-200 ${
+                                className={`w-full text-left px-4 py-2 border rounded-md transition-colors duration-200 cursor-pointer ${
                                     filters.availability === option
                                         ? 'bg-green-100 border-green-400 text-green-800'
                                         : 'bg-white border-gray-300 hover:bg-gray-50'
@@ -249,7 +249,7 @@ function AgriMart() {
                            <button
                              key={cat}
                              onClick={() => setFilters(prev => ({...prev, category: cat}))}
-                             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer ${
                                  filters.category === cat
                                      ? 'bg-green-600 text-white'
                                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
@@ -291,7 +291,7 @@ function AgriMart() {
                             
                             <button 
                                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                                className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+                                className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer"
                             >
                                 <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.572a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />

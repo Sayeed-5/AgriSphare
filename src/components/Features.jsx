@@ -80,7 +80,7 @@ import {
                           </li>
                         ))}
                       </ul>
-                      <button className="flex items-center gap-2 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white px-3 pl-6 py-2 rounded-3xl font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">{feature.navigator}  <ArrowRightCircle /> </button>
+                      <button className="flex items-center gap-2 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white px-3 pl-6 py-2 rounded-3xl font-semibold text-lg transition-colors duration-300 shadow-lg hover:shadow-xl">{feature.navigator}  <ArrowRightCircle /> </button>
                     </div>
                     <div className="min-w-md"></div>
                   </div>

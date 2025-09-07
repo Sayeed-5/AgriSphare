@@ -149,7 +149,7 @@
 
 
 
-import { Menu, X, UserCircle2 } from "lucide-react";
+import { Menu, X, UserCircle2, LogOutIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFirebase, auth, firestore } from "../context/firebase";
 import { useRef, useEffect, useState } from "react";
@@ -217,28 +217,28 @@ const Header = () => {
           <nav className="hidden md:flex space-x-6">
             <Link 
               to="/" 
-              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black">
+              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black transition-all duration-200">
               Home
             </Link>
             <Link 
               to="/education" 
-              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black">
+              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black transition-all duration-200">
               Education
             </Link>
             <Link 
               to="/agrimart" 
-              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black">
+              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black transition-all duration-200">
               AgriMart
             </Link>
             <Link 
               to="/ai-detection" 
-              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black">
+              className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black transition-all duration-200">
               AI Detection
             </Link>
             {currentUser?.role === "seller" && (
               <Link 
                 to="/products" 
-                className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black">
+                className="text-sm font-medium transition-colors hover:bg-white/40 rounded-md px-2 py-0.5 hover:text-[#29B6F6] text-black transition-all duration-200">
                 Products
               </Link>
             )}
@@ -262,8 +262,8 @@ const Header = () => {
                 </span>
                 <button 
                   onClick={handleLogout} 
-                  className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-sm rounded">
-                  Logout
+                  className="px-2 py-2 bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white rounded-3xl text-white text-sm">
+                  <LogOutIcon/>
                 </button>
               </div>
             ) : (
