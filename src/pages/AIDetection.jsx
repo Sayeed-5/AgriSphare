@@ -175,7 +175,7 @@ const AIDetection = () => {
                     <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
                         🌿 Plant Disease AI Detector
                     </h1>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-xl text-[#fff924] max-w-3xl mx-auto leading-relaxed">
                         Advanced AI-powered plant health analysis with instant treatment recommendations
                     </p>
                 </div>
