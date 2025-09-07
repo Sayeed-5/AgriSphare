@@ -20,14 +20,14 @@ function LandingPage() {
             <main>
               <Hero />
               <Features />
-              <AIDetection/>
+{/*               <AIDetection/>
               <div className="max-w-[100rem] mx-auto " >
                 <div className="min-h-screen flex flex-col gap-8 py-12">
                   <Carasoul/>
                   <VideoCarasoul/>
                   <SchemeCards/>
                 </div>
-              </div>
+              </div> */}
               <ChatbotWidget/>
             </main>
           </div>
