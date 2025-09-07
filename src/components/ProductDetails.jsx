@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useFirebase } from '../context/firebase';
+import { useParams } from 'react-router-dom';
 
 // --- Icon Components (using inline SVG for single-file compatibility) ---
 
@@ -39,19 +41,22 @@ const CheckCircleIcon = ({ className }) => (
 
 
 // --- Main App Component ---
+ 
+const ProductDetails = () => {
+    const [quantity, setQuantity] = useState();
+    const firebase = useFirebase();
+    const [products, setProducts] = useState(null);
+    const { id } = useParams();
 
-const ProductDetails = (props) => {
-    const [quantity, setQuantity] = useState(50);
+    // const product = {
+    //     name: products.name,
+    //     image: products.image,
+    //     price: products.price,
+    //     unit: products.unit,
+    //     minOrder: products.minOrder,
+    //     tags: ["Vegetables", "In stock", "Fast delivery"],
 
-    const product = {
-        name: "Tomato",
-        imageUrl: "https://images.unsplash.com/photo-1561138972-66c36191b619?q=80&w=1935&auto=format&fit=crop",
-        price: 28,
-        unit: "kg",
-        minOrder: 50,
-        tags: ["Vegetables", "In stock", "Fast delivery"],
-
-    };
+    // };
 
     const seller = {
         name: "GreenField Produce",
@@ -66,6 +71,21 @@ const ProductDetails = (props) => {
         avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop"
     };
 
+    //console.log(firebase.user);
+
+    const placeOrder = async () => {
+        const result = await firebase.placeOrder(id);
+        alert("Your Order is placed")
+    }
+
+    useEffect(() => {
+        firebase.getProductsByid(id).then((res) => setProducts(res.data()));
+    }, [id]);
+
+    if (!products) {
+        return <div className="text-center p-10">Loading...</div>;
+    }
+
     return (
         <div className="max-w-6xl mx-auto rounded-xl font-sans min-h-screen">
             <div className="container mx-auto p-4 sm:p-6 lg:p-8 bg-white/30 backdrop-blur-xs rounded-xl ">
@@ -76,8 +96,8 @@ const ProductDetails = (props) => {
                             {/* Product Image */}
                             <div className="md:w-1/2">
                                 <img
-                                    src={product.imageUrl}
-                                    alt={product.name}
+                                    src={products.image}
+                                    alt={products.name}
                                     className="w-full aspect-square object-cover rounded-xl shadow-md"
                                 />
                             </div>
@@ -85,40 +105,33 @@ const ProductDetails = (props) => {
                             {/* Product Info */}
                             <div className="md:w-1/2 flex flex-col my-auto">
                                 <div className="flex items-center gap-2 mb-2">
-                                    {product.tags.map(tag => (
-                                        <span key={tag} className={`text-xs font-medium px-3 py-1 rounded-full ${tag === 'In stock' ? 'bg-green-100 text-green-800' :
-                                            tag === 'Fast delivery' ? 'bg-blue-100 text-blue-800' :
-                                                'bg-gray-100 text-gray-800'
-                                            }`}>
-                                            {tag}
-                                        </span>
-                                    ))}
+                                    
                                 </div>
-                                <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+                                <h1 className="text-3xl font-bold text-gray-900">{products.name}</h1>
 
 
                                 <div className="text-4xl font-extrabold text-gray-800 mb-2">
-                                    ₹{product.price} <span className="text-lg font-medium text-gray-500"> per {product.unit}</span>
+                                    ₹{products.price} <span className="text-lg font-medium text-gray-500"> per {products.unit}</span>
                                 </div>
 
-                                <div className="text-sm text-gray-500 mb-1">Minimum order quantity: {product.minOrder} kg</div>
+                                <div className="text-sm text-gray-500 mb-1">Minimum order quantity: {products.minOrder} kg</div>
                                 <div className="text-sm text-gray-500 mb-6">Seller rating protection and quality checked</div>
 
                                 <div className="bg-gray-50 rounded-lg p-4">
-                                    <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-2">Enter quantity ({product.unit})</label>
+                                    <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-2">Enter quantity ({products.unit})</label>
                                     <input
                                         type="number"
                                         id="quantity"
                                         value={quantity}
                                         onChange={(e) => setQuantity(e.target.value)}
-                                        min={product.minOrder}
+                                        min={products.minOrder}
                                         className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-                                        placeholder={`e.g., ${product.minOrder}`}
+                                        placeholder={`e.g., ${products.minOrder}`}
                                     />
                                 </div>
 
                                 <div className="w-[16rem] my-4 mx-auto">
-                                    <button className="w-full px-4 py-3 text-center bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] font-semibold text-white rounded-lg transition-all duration-300 shadow-sm">
+                                    <button onClick={placeOrder} className="w-full px-4 py-3 text-center bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] font-semibold text-white rounded-lg transition-all duration-300 shadow-sm">
                                         Buy Now
                                     </button>
                                 </div>
@@ -130,9 +143,9 @@ const ProductDetails = (props) => {
                     {/* Right Side: Owner/Seller Details */}
                     <div className="bg-white rounded-2xl shadow-sm p-6 sticky top-8">
                         <div className="flex items-center gap-4 mb-4">
-                            <img src={seller.avatarUrl} alt={seller.name} className="w-16 h-16 rounded-full object-cover" />
+                            <img src={seller.avatarUrl} alt={firebase.displayName} className="w-16 h-16 rounded-full object-cover" />
                             <div>
-                                <h3 className="text-lg font-bold text-gray-900">{seller.name}</h3>
+                                <h3 className="text-lg font-bold text-gray-900">{firebase.user.displayName}</h3>
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
                                     {seller.isCertified && <CheckCircleIcon className="w-4 h-4 text-green-600" />}
                                     <span>Certified • {seller.platformYears} yrs on platform</span>

@@ -8,7 +8,7 @@ import { getAuth,
         onAuthStateChanged, 
         signOut 
     } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs, query, where, doc, setDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc, getDocs, query, where, doc, setDoc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 
 const FirebaseContext = createContext(null);
 const useFirebase = () => useContext(FirebaseContext);
@@ -31,14 +31,21 @@ export const firestore = getFirestore(app)
 export const FirebaseProvider = (props) => {
 
     const [user , setUser] = useState(null);
+    const [dbUser, setDbUser] = useState(null);
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user)
+
+                const userDoc = await getDoc(doc(firestore, "Users", user.uid));
+                if (userDoc.exists()) {
+                    setDbUser(userDoc.data());
+                }
             }
             else {
                 setUser(null)
+                setDbUser(null);
             }
         });
     }, [])
@@ -49,12 +56,13 @@ export const FirebaseProvider = (props) => {
     const signinWithEmailPassword = (email, password) => signInWithEmailAndPassword(auth, email, password);
     const signinWithGoogle = () => signInWithPopup(auth, googleProvider);
     const logout = () => signOut(auth);
-    const CreateNewUser = async (username, email, phone, password, user) => {
+    const CreateNewUser = async (username, email, phone, password, location, user) => {
         return await setDoc(doc(firestore, 'Users', user.uid), {
           username,
           email,
           phone, 
           password,
+          location,
           role: "user"
         });
     };
@@ -74,10 +82,12 @@ export const FirebaseProvider = (props) => {
         });
     };
 
-    const AddNewProduct = async (name, category, price, minOrder, stock, imageUrl) => {
+    const AddNewProduct = async (name, category, description, unit, price, minOrder, stock, imageUrl) => {
         return await addDoc(collection(firestore, 'Products'), {
           name,
           category,
+          description,
+          unit,
           price, 
           minOrder,
           stock,
@@ -141,17 +151,19 @@ export const FirebaseProvider = (props) => {
             });
           });
         }
-      
         return orders;
-      };
+    };
       
+    const getProductsByid = async (id) => {
+        return getDoc(doc(firestore, 'Products', id));
+    }
       
     const isLoggedIn = user ? true : false;
 
     //console.log(user);
 
     return (
-        <FirebaseContext.Provider value={{signupWithEmailPassword, signinWithEmailPassword, signinWithGoogle, CreateNewUser, logout, getAllProducts, AddNewProduct, fetchMyProducts, placeOrder, CreateNewSeller, getOrders, fetchMyOrders, user, isLoggedIn}}>
+        <FirebaseContext.Provider value={{signupWithEmailPassword, signinWithEmailPassword, signinWithGoogle, CreateNewUser, logout, getAllProducts, AddNewProduct, fetchMyProducts, placeOrder, CreateNewSeller, getOrders, fetchMyOrders, getProductsByid, user,dbUser, isLoggedIn}}>
             {props.children}
         </FirebaseContext.Provider>
     );

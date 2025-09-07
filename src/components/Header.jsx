@@ -10,6 +10,7 @@ const Header = () => {
   const firebase = useFirebase();
   const sidebarRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await firebase.logout();

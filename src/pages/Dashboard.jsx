@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LogOutIcon } from "lucide-react";
+import { useFirebase, auth } from "../context/firebase";
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // --- SVG Icons ---
 // Using components for icons to keep the main component clean
@@ -29,37 +32,73 @@ const CartIcon = () => (
 
 // --- Sidebar Component ---
 const Sidebar = () => {
-    const menuItems = [
-        { name: 'Overview', icon: <OverviewIcon /> },
-        { name: 'My Orders', icon: <OrdersIcon /> },
-        { name: 'Orders', icon: <CartIcon /> },
-        { name: 'Education', icon: <EducationIcon /> },
-        { name: 'AI Detection', icon: <AIDetectionIcon /> },
-        { name: 'Log Out', icon: <LogOutIcon /> },
-    ];
+    const firebase = useFirebase();
+    const { user, dbUser} = useFirebase();
 
-    const activeItem = 'Overview';
+    const handleLogout = async () => {
+      await firebase.logout();
+    };
 
     return (
         <aside className="w-64 flex-shrink-0 bg-white p-4 hidden lg:block border-r">
-            <div className="flex flex-col space-y-2">
-                {menuItems.map((item) => (
-                    <a
-                        key={item.name}
-                        href="#"
-                        className={`flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium ${
-                            item.name === activeItem
-                                ? 'bg-gray-200 text-gray-900'
-                                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                        }`}
-                    >
-                        {item.icon}
-                        <span>{item.name}</span>
-                    </a>
-                ))}
-            </div>
+          <div className="flex flex-col space-y-2">
+    
+            <Link
+              to="/dashboard"
+              className="flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium bg-gray-200 text-gray-900"
+            >
+              <OverviewIcon />
+              <span>Overview</span>
+            </Link>
+    
+
+            <Link
+              to="/my-orders"
+              className="flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <OrdersIcon />
+              <span>My Orders</span>
+            </Link>
+
+
+            {dbUser?.role === "seller" &&(<Link
+              to="/orders"
+              className="flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <CartIcon />
+              <span>Orders</span>
+            </Link>)}
+            
+
+            <Link
+              to="/education"
+              className="flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <EducationIcon />
+              <span>Education</span>
+            </Link>
+
+            <a
+              href="https://huggingface.co/spaces/SuvamBhola/plant-disease-detector"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <AIDetectionIcon />
+              <span>AI Detection</span>
+            </a>
+    
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 text-left"
+            >
+              <LogOutIcon />
+              <span>Log Out</span>
+            </button>
+    
+          </div>
         </aside>
-    );
+      );
 };
 
 // --- Order Item Component ---
@@ -90,7 +129,6 @@ const OrderItem = ({ type, orderId, items, status, statusColor, isAwaitingPickup
     </div>
 );
 
-
 // --- Orders Section Component ---
 const OrdersSection = () => {
     const [activeTab, setActiveTab] = useState('seller');
@@ -110,18 +148,6 @@ const OrdersSection = () => {
         <div className="mt-6">
             <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-800">Orders</h2>
-                <div className="flex items-center bg-gray-100 p-1 rounded-lg">
-                    <button 
-                        onClick={() => setActiveTab('buyer')}
-                        className={`px-6 py-2 rounded-md text-sm font-semibold transition-colors ${activeTab === 'buyer' ? 'bg-white shadow' : 'text-gray-600'}`}>
-                        Buyer
-                    </button>
-                    <button 
-                        onClick={() => setActiveTab('seller')}
-                        className={`px-6 py-2 rounded-md text-sm font-semibold transition-colors ${activeTab === 'seller' ? 'bg-white shadow' : 'text-gray-600'}`}>
-                        Seller
-                    </button>
-                </div>
             </div>
             
             <div className="mt-6 space-y-6">
@@ -198,6 +224,19 @@ const OrdersSection = () => {
 
 // --- Main App Component ---//
 function Dashboard() {
+
+    const { user, dbUser} = useFirebase();
+    const navigate = useNavigate();
+
+    const redirctTo = () => {
+        navigate('/products');
+    }
+
+    if (!user) {
+        navigate('/');
+        return null;
+      }
+
     return (
         <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
             <div className="flex">
@@ -218,13 +257,13 @@ function Dashboard() {
                                 />
                                 <div>
                                     <div className="flex items-center space-x-2">
-                                        <h2 className="text-2xl font-bold text-gray-900">Rahul Mehta</h2>
+                                        <h2 className="text-2xl font-bold text-gray-900">{dbUser?.fullname || dbUser?.username}</h2>
                                         <span className="bg-green-500 text-white px-2 py-1 rounded-full flex items-center text-xs font-semibold">
                                             <VerifiedIcon />
                                             <span className="ml-1">Verified</span>
                                         </span>
                                     </div>
-                                    <p className="text-gray-500 mt-1">rahul.mehta@example.com • Nashik, IN</p>
+                                    <p className="text-gray-500 mt-1">{dbUser?.email} • {dbUser?.location}, IN</p>
                                     <div className="flex space-x-2 mt-3">
                                         <span className="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Tomato</span>
                                         <span className="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1 rounded-full">Onion</span>
@@ -235,18 +274,10 @@ function Dashboard() {
                            </div>
                            <div className="flex space-x-3">
                                 <button className="font-semibold text-gray-700 bg-white border border-gray-300 px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors">Edit Profile</button>
-                                <button className="font-semibold text-white bg-green-600 px-5 py-2.5 rounded-lg hover:bg-green-700 transition-colors">Add Crop</button>
+                                {dbUser?.role === "seller" &&(<button onClick={redirctTo} className="font-semibold text-white bg-green-600 px-5 py-2.5 rounded-lg hover:bg-green-700 transition-colors">Add Crop</button>)}
                            </div>
                         </div>
-                        <div className="mt-5">
-                            <div className="flex justify-between items-center mb-1">
-                                <span className="text-sm font-medium text-gray-600">Profile completeness</span>
-                                <span className="text-sm font-bold text-green-600">76%</span>
-                            </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                                <div className="bg-green-500 h-2.5 rounded-full" style={{ width: '76%' }}></div>
-                            </div>
-                        </div>
+                        
                     </div>
                     
                     <OrdersSection />
