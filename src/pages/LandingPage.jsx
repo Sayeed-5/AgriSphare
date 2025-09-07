@@ -22,7 +22,7 @@ function LandingPage() {
               <Features />
               <AIDetection/>
               <div className="max-w-[100rem] mx-auto " >
-                <div className="min-h-screen py-12">
+                <div className="min-h-screen flex flex-col gap-8 py-12">
                   <Carasoul/>
                   <VideoCarasoul/>
                   <SchemeCards/>
