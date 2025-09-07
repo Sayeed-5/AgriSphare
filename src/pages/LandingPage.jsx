@@ -4,7 +4,7 @@ import Features from "../components/Features"
 // import FarmerDashboard from "../components/FarmerDashboard"
 // import LocalBuyersLogistics from "../components/LocalBuyersLogistics"
 // import Leaderboard from "../components/LeaderBoard"
-// import Footer from "../components/Footer"
+import Footer from "../components/Footer"
 import ProductDetails from "../components/ProductDetails"
 import Carasoul from "../components/Carasoul"
 import VideoCarasoul from "../components/VideoCarasoul"
@@ -25,7 +25,7 @@ function LandingPage() {
               <Features />
               <ChatbotWidget/>
             </main>
-            {/* <Footer /> */}
+            <Footer />
           </div>
         </div>
       </TooltipProvider>
