@@ -166,7 +166,7 @@ export const FirebaseProvider = (props) => {
               name: orderDoc.data().displayName,
               quantity: productData.minOrder,
               total: productData.price * parseFloat(productData.minOrder),
-              status: "ongoing", // default (later update from Firestore if you store it)
+              status: orderData.status || "ongoing", // default (later update from Firestore if you store it)
               ...orderDoc.data()
             });
           });
