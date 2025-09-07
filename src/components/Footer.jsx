@@ -11,7 +11,7 @@ const Footer = () => {
                             <div className="w-6 h-6 bg-green-600 rounded flex items-center justify-center">
                                 <span className="text-white text-xs font-bold">🌱</span>
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900">AgriConnect</h3>
+                            <h3 className="text-lg font-semibold text-gray-900">AgriSphare</h3>
                         </div>
                         <p className="text-sm text-gray-600 leading-relaxed">
                             Connecting farmers and buyers with AI-powered tools, education, and fair market access.
@@ -85,7 +85,7 @@ const Footer = () => {
                 <div className="mt-8 pt-6 border-t border-gray-200">
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         <p className="text-xs text-gray-500">
-                            © 2025 AgriConnect. All rights reserved.
+                            © 2025 AgriSphare. All rights reserved.
                         </p>
                         <div className="flex items-center space-x-6">
                             <a href="#" className="text-xs text-gray-500 hover:text-gray-700 transition-colors">
