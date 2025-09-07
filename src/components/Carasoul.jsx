@@ -28,7 +28,7 @@ const Carasoul = () => {
         {
             thumbnail: "https://m.media-amazon.com/images/I/414iTK-C1CL._UF1000,1000_QL80_.jpg",
             title: "Learn to Grow",
-            link: "https://example.comhttps://drive.google.com/file/d/1IwpXQKObj9T4r6mgAZf6OPa21fGkDPJn/view",
+            link: "https://drive.google.com/file/d/1IwpXQKObj9T4r6mgAZf6OPa21fGkDPJn/view",
         },
         {
             thumbnail: "https://m.media-amazon.com/images/I/71KmgOL2q4L.jpg",
