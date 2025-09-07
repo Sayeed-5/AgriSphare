@@ -8,6 +8,7 @@ import AgriMart from './pages/AgriMart';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import { Analytics } from "@vercel/analytics/react"
+import ProductDetails from './components/ProductDetails';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/seller" element={<SellerSignup />} /> 
           <Route path="/agrimart" element={<AgriMart />} /> 
           <Route path="/dashboard" element={<Dashboard />} /> 
+          <Route path="/product/details" element={<ProductDetails />} /> 
         </Routes>
     </>
   )
