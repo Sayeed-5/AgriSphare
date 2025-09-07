@@ -169,7 +169,7 @@ const AIDetection = () => {
 
     return (
         <div className="min-h-screen bg-[#FFF9F0]/10 backdrop-blur-sm p-4 py-18">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
