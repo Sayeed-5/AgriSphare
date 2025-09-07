@@ -14,14 +14,14 @@ const OrderCard = ({ order, onUpdateStatus }) => {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-start space-x-4">
           <img
-            src={order.image}
+            src={order.avatar}
             alt={order.product}
             className="w-10 h-10 rounded-full object-cover"
           />
           <div>
             <p className="font-bold text-gray-800">{order.name}</p>
             <p className="text-sm text-gray-500">
-              Wants to buy: {order.product} (My product)
+              Wants to buy: {order.product}
             </p>
           </div>
         </div>

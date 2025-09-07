@@ -149,12 +149,13 @@
 
 
 
-import { Menu, X, UserCircle2, LogOutIcon } from "lucide-react";
+import { Menu, X, UserCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFirebase, auth, firestore } from "../context/firebase";
 import { useRef, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const firebase = useFirebase();
@@ -163,6 +164,11 @@ const Header = () => {
 
   const handleLogout = async () => {
     await firebase.logout();
+  };
+
+  const goTodashboard = async () => {
+    window.location.href = "/dashboard";
+    // Navigate("/dashboard");
   };
 
   useEffect(() => {
@@ -257,7 +263,7 @@ const Header = () => {
                 ) : (
                   <UserCircle2 size={28} className="text-[#212121]" />
                 )}
-                <span className="text-sm font-medium text-[#212121] hover:text-[#29B6F6]">
+                <span onClick={goTodashboard} className="text-sm font-medium text-[#212121] hover:text-[#29B6F6]">
                   {firebase.user.displayName || "User" || firebase.user.username}
                 </span>
                 <button 
@@ -366,7 +372,6 @@ const Header = () => {
               </nav>
             </div>
           )}
-
         </div>
       </div>
     </header>

@@ -6,6 +6,7 @@ import Features from "../components/Features"
 // import Leaderboard from "../components/LeaderBoard"
 // import Footer from "../components/Footer"
 import ProductDetails from "../components/ProductDetails"
+// import Dashboard from "./Dashboard"
 
 
 function LandingPage() {
@@ -17,6 +18,7 @@ function LandingPage() {
               <Hero />
               <Features />
               <ProductDetails />
+              {/* <Dashboard/> */}
               {/* <FarmerDashboard />
               <Leaderboard />
               <LocalBuyersLogistics /> */}

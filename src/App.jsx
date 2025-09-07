@@ -6,18 +6,22 @@ import SigninPage from './pages/SignIn';
 import SellerSignup from './pages/Seller_signup';
 import AgriMart from './pages/AgriMart';
 import Header from './components/Header';
+import Dashboard from './pages/Dashboard';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
 
   return (
     <>
       <Header />
+      <Analytics/>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<SigninPage />} />
           <Route path="/products" element={<Products />} /> 
           <Route path="/seller" element={<SellerSignup />} /> 
           <Route path="/agrimart" element={<AgriMart />} /> 
+          <Route path="/dashboard" element={<Dashboard />} /> 
         </Routes>
     </>
   )

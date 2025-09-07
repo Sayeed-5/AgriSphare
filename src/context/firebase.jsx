@@ -132,7 +132,7 @@ export const FirebaseProvider = (props) => {
               productId: productId,
               product: productData.name,
               pricePerUnit: productData.price,
-              avatar: orderDoc.data().photoURL || "/user-logo.png",
+              avatar: productData.image,
               name: orderDoc.data().displayName,
               quantity: productData.minOrder,
               total: productData.price * parseFloat(productData.minOrder),
