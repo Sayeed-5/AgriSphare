@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../context/firebase';
+import { Navigate } from 'react-router-dom';
 
 // --- HELPER COMPONENTS ---
 
@@ -25,6 +26,11 @@ const ProductCard = (props) => {
         //console.log("Order Placed", result);
     }
 
+    const productdetails = async () => {
+        window.location.href = "/product/details";
+        // Navigate("/product/details");
+      };
+
     return (
         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div className="w-full h-48 bg-gray-200">
@@ -41,9 +47,9 @@ const ProductCard = (props) => {
                 <p className="text-sm text-gray-500 mb-4">Min order: {props.minOrder} </p>
                 
                 <div className="flex items-center space-x-2">
-                    <button className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                    <button onClick={productdetails} className="w-full text-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200">
                         Details
-                    </button>
+                    </button> 
                     <button onClick={placeOrder} className="w-full text-center py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200">
                         Buy Now
                     </button>
