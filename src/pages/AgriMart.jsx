@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../context/firebase';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // --- HELPER COMPONENTS ---
 
 // ProductCard Component: Renders a single product item
 const ProductCard = (props) => {
     const firebase = useFirebase()
+    const navigate = useNavigate();
+    // console.log(props);
 
     const categoryColors = {
         Vegetables: 'bg-green-100 text-green-800',
-        Seeds: 'bg-yellow-100 text-yellow-800',
+        Seeds: 'bg-yellow-100 text-yellow-800',     
         Fertilizer: 'bg-blue-100 text-blue-800',
         Saplings: 'bg-lime-100 text-lime-800',
     };
@@ -27,9 +29,8 @@ const ProductCard = (props) => {
     }
 
     const productdetails = async () => {
-        window.location.href = "/product/details";
-        // Navigate("/product/details");
-      };
+        navigate(`/product/details/${props.id}`)
+    }; 
 
     return (
         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out">

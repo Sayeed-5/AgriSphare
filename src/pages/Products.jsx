@@ -84,6 +84,8 @@ const AddProductForm = () => {
 
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
+  const [description, setDescription] = useState('')
+  const [unit, setUnit] = useState('')
   const [price, setPrice] = useState('')
   const [minOrder, setMinOrder] = useState('')
   const [stock, setStock] = useState('')
@@ -96,7 +98,7 @@ const AddProductForm = () => {
       return;
     }
     const imageUrl = await uploadOnCloudinary(image);
-    const list = await firebase.AddNewProduct(name, category, price, minOrder, stock, imageUrl);
+    const list = await firebase.AddNewProduct(name, category, description, unit, price, minOrder, stock, imageUrl);
     alert("Product add successfully !");
   }
 
@@ -136,17 +138,18 @@ const AddProductForm = () => {
             <div className="relative">
               <input
                 type="text"
-                placeholder="e.g., Tomato (Heirloom)"
+                placeholder="Description"
                 className="form-input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
           </div>
           
           <div>
             <label className="text-sm font-medium text-gray-700">Units</label>
-            <select className="form-input">
+            <select value={unit}
+              onChange={(e) => setUnit(e.target.value)} className="form-input">
               <option>Kg</option>
               <option>Pc</option>
               <option>Bag</option>
@@ -227,7 +230,7 @@ const AddProductForm = () => {
             </label>
           </div>
           <div className="mx-auto gap-3 mt-6 md:col-span-2">
-            <button type='submit' className="bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white px-6 py-2 rounded-3xl font-semibold text-sm transition-colors shadow-lg hover:shadow-xl transition-colors duration-300 py-2 px-6 rounded-lg cursor-pointer">
+            <button type='submit' className="bg-[#4CAF50] hover:bg-[#FFC107] hover:text-[#212121] text-white  font-semibold text-sm transition-colors shadow-lg hover:shadow-xl  duration-300 py-2 px-6 rounded-lg cursor-pointer">
               Add Product
             </button>
           </div>

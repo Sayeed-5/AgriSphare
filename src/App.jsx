@@ -23,7 +23,7 @@ function App() {
           <Route path="/seller" element={<SellerSignup />} /> 
           <Route path="/agrimart" element={<AgriMart />} /> 
           <Route path="/dashboard" element={<Dashboard />} /> 
-          <Route path="/product/details" element={<ProductDetails />} /> 
+          <Route path="/product/details/:id" element={<ProductDetails />} /> 
         </Routes>
     </>
   )
