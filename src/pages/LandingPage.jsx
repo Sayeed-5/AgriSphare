@@ -9,6 +9,9 @@ import ProductDetails from "../components/ProductDetails"
 import Carasoul from "../components/Carasoul"
 import VideoCarasoul from "../components/VideoCarasoul"
 import SchemeCards from "../components/SchemeCards"
+import FarmingChatbot from "../components/FarmingChatbot"
+import AIDetection from "./AIDetection"
+import ChatbotWidget from "../components/ChatbotWidget"
 // import Dashboard from "./Dashboard"
 
 
@@ -20,6 +23,7 @@ function LandingPage() {
             <main>
               <Hero />
               <Features />
+              <ChatbotWidget/>
             </main>
             {/* <Footer /> */}
           </div>
