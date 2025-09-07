@@ -168,7 +168,7 @@ const AIDetection = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#FFF9F0]/30 p-4 py-18">
+        <div className="min-h-screen bg-[#FFF9F0]/10 backdrop-blur-md p-4 py-18">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
