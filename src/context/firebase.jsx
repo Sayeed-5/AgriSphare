@@ -111,15 +111,39 @@ export const FirebaseProvider = (props) => {
         return result;
     }
 
-    const placeOrder = async (productId) => {
-        const collectionRef = collection(firestore, 'Products', productId, 'Orders');
-        const result = await addDoc(collectionRef, {
-            userId: user.uid,
-            email: user.email,
-            displayName: user.displayName,
+
+    // Place Order function
+    const placeOrder = async (productId, user) => {
+    try {
+        // 1. Save inside product's sub-collection
+        const productOrdersRef = collection(firestore, "Products", productId, "Orders");
+        const productOrderDoc = await addDoc(productOrdersRef, {
+        userId: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        productId,
+        status: "ongoing",
+        createdAt: serverTimestamp(),
         });
-        return result
+
+        // 2. Save inside global Orders collection (same orderId)
+        const globalOrderRef = doc(firestore, "Orders", productOrderDoc.id);
+        await setDoc(globalOrderRef, {
+        userId: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        productId,
+        status: "ongoing",
+        createdAt: serverTimestamp(),
+        });
+
+        return productOrderDoc; // return order ref if needed
+    } catch (error) {
+        console.error("Error placing order:", error);
+        throw error;
     }
+    };
+
 
     const getOrders = async (productId) => {
         const collectionRef = collection(firestore, 'Products', productId, 'Orders');
