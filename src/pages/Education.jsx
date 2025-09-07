@@ -4,7 +4,7 @@ import VideoCarasoul from "../components/VideoCarasoul"
 
 function Education() {
     return (
-        <div className="max-w-[100rem] mx-auto bg-white" >
+        <div className="max-w-[100rem] mx-auto bg-[#F5F9F4]" >
           <div className="min-h-screen py-12">
             <Carasoul/>
             <VideoCarasoul/>

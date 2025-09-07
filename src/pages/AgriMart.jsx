@@ -32,7 +32,7 @@ const ProductCard = (props) => {
       };
 
     return (
-        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out">
+        <div className="bg-[#FFF9F0] border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div className="w-full h-48 bg-gray-200">
                 <img src={props.image} alt={props.name} className="w-full h-full object-cover"/>
             </div>
@@ -245,7 +245,7 @@ function AgriMart() {
 
 
     return (
-        <div className="bg-gray-50 min-h-screen font-sans">
+        <div className="bg-[#FFF9F0] min-h-screen font-sans">
             <div className="container mx-auto px-4 py-8">
                 {/* Header */}
                 <header className="flex flex-col md:flex-row justify-between items-center mb-6">
