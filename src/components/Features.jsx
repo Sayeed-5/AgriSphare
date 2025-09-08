@@ -1,6 +1,6 @@
 import {
     ArrowRightCircle,
-    Sprout, Wheat, CalendarRange, Leaf, ScanSearch, Bug,
+    Sprout, CalendarRange, Leaf, ScanSearch, Bug,
     Sparkles, Radar, ReceiptText, Store, ShoppingCart,
     Activity, Recycle
   } from "lucide-react"
