@@ -4,8 +4,11 @@ import {
     Sparkles, Radar, ReceiptText, Store, ShoppingCart,
     Activity, Recycle
   } from "lucide-react"
+import { useNavigate } from "react-router-dom"
   
   const Features = () => {
+    const navigate = useNavigate();
+
     const features = [
       {
         icon: "🌱",
@@ -17,7 +20,8 @@ import {
           { icon: <Leaf className="h-4 w-4 text-emerald-600" />, text: "Sustainable & organic methods" },
         ],
         image: "https://img.freepik.com/premium-photo/farmer-uses-tablet-monitor-his-crops-field_14117-770754.jpg",
-        navigator: "Explore Guides"
+        navigator: "Explore Guides",
+        navigateFunction: () => navigate('/education')
       },
       {
         icon: "🛡️",
@@ -29,7 +33,8 @@ import {
           { icon: <Sparkles className="h-4 w-4 text-yellow-600" />, text: "Personalized recommendations" },
         ],
         image: "https://as2.ftcdn.net/v2/jpg/05/17/72/83/1000_F_517728333_bRo1d5zBGahlA08DZiDZwcr44jvbAT8c.jpg",
-        navigator: "Try Crop Protection"
+        navigator: "Try Crop Protection",
+        navigateFunction: () => navigate('/education')
       },
       {
         icon: "⚙️",
@@ -41,7 +46,8 @@ import {
           { icon: <Store className="h-4 w-4 text-teal-600" />, text: "Connect with local markets instantly" },
         ],
         image: "https://img.freepik.com/premium-photo/probe-soil-ph_87720-144273.jpg?w=2000",
-        navigator: "Explore Guides"
+        navigator: "Explore Guides",
+        navigateFunction: () => navigate('/education')
       },
       {
         icon: "🛒",
@@ -53,7 +59,8 @@ import {
           { icon: <Recycle className="h-4 w-4 text-lime-600" />, text: "Eco-friendly innovations " },
         ],
         image: "https://media.istockphoto.com/photos/farmer-handshake-picture-id169940000?k=6&m=169940000&s=612x612&w=0&h=n7vYxTn7Eww4m_MKTEU6oS2CuoZzXX5ShiKpewr6_14=",
-        navigator: "Start Selling"
+        navigator: "Start Selling",
+        navigateFunction: () => navigate('/agrimart')
       },
     ]
   
